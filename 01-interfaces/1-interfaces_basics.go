@@ -39,6 +39,7 @@ func (t *T) Write(p []byte) (n int, err error) {
 	return 0, nil
 }
 
+// Базовая механика работы с интерфейсами.
 func basics() {
 	var t *T
 	var r Reader
