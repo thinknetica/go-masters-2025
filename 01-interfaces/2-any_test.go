@@ -9,5 +9,5 @@ func Test_anyType(t *testing.T) {
 }
 
 func Test_anyParam(t *testing.T) {
-	anyParam(1, "2", func() {})
+	anyParam(1, "2", func() {}, nil)
 }
