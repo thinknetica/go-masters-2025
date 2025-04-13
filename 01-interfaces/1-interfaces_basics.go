@@ -41,8 +41,13 @@ func (t *T) Write(p []byte) (n int, err error) {
 
 // Базовая механика работы с интерфейсами.
 func basics() {
+	// Конкретный тип данных.
 	var t *T
+
+	// Интерфейс.
 	var r Reader
+
+	// Типичный вопрос на собеседованиях про равенство интерфейсной переменной и nil.
 	if r == nil {
 		log.Info().Msg("r is nil")
 	} else {
@@ -66,21 +71,31 @@ func basics() {
 
 	r.Read(nil)
 
-	// Type assertion (interface)
+	// Проверка, что тип данных имплементирует интерфейс
+	// (используется в json.Marshal/Unmarshal).
+	var a any = t
+	if _, ok := a.(Reader); ok {
+		log.Info().Msgf("%T is Reader", a)
+	} else {
+		log.Info().Msgf("%T is not Reader", a)
+	}
+
+	// Type assertion (interface).
 	rw, ok := r.(ReadWriter)
 	if ok {
 		log.Info().Msg("r is ReadWriter")
 		rw.Write(nil)
 	}
 
-	// Type assertion (type)
+	// Type assertion (type).
 	val, ok := rw.(*T)
 	if ok {
 		log.Info().Msg("rw is *T")
 		val.Read(nil)
+		val.Write(nil)
 	}
 
-	// Type switch
+	// Type switch.
 	log.Info().Msg("Type switch")
 	switch v := rw.(type) {
 	case nil:

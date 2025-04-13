@@ -6,7 +6,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// Бизнес-логика частью которой является интерфейс.
+// Бизнес-логика, частью которой является интерфейс.
 type uploader interface {
 	upload(b []byte) (uri string, err error)
 }
