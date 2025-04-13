@@ -2,6 +2,7 @@ package interfaces
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 
 	"github.com/rs/zerolog/log"
@@ -48,6 +49,13 @@ func stdLib() {
 	var a any
 
 	switch val := a.(type) {
+	// Обычно функциям следует принимать интерфейсы как параметры,
+	// но возвращать конкретные типы.
+	// Интерфейс `error` является исключением из правил.
+	case error:
+		log.Info().Msgf("var a is error: %v", val.Error())
+	case fmt.Stringer:
+		log.Info().Msg(val.String())
 	case io.Reader:
 		val.Read(nil)
 	case io.Writer:
